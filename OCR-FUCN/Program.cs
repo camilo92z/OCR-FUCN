@@ -22,11 +22,7 @@ namespace OCR_FUCN
                     {
                         using (var page = engine.Process(img))
                         {
-                            var text = page.GetText();
                             Console.WriteLine("Confianza media: {0}", page.GetMeanConfidence());
-
-                            Console.WriteLine("Text (GetText): \r\n{0}", text);
-                            Console.WriteLine("Text (iterator):");
                             using (var iter = page.GetIterator())
                             {
                                 iter.Begin();
@@ -38,10 +34,6 @@ namespace OCR_FUCN
                                         {
                                             do
                                             {
-                                                if (iter.IsAtBeginningOf(PageIteratorLevel.Block))
-                                                {
-                                                    Console.WriteLine("<BLOCK>");
-                                                }
                                                 Console.Write(iter.GetText(PageIteratorLevel.Word));
                                                 Console.Write(" ");
                                                 if (iter.IsAtFinalOf(PageIteratorLevel.TextLine, PageIteratorLevel.Word))
